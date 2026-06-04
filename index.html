@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI Chat Web</title>
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="会话">
+        <div class="brand-row">
+          <div>
+            <div class="brand-title">AI Chat Web</div>
+            <div class="brand-subtitle">Codex CLI</div>
+          </div>
+          <button class="icon-button" id="new-chat" type="button" title="新会话" aria-label="新会话">+</button>
+        </div>
+
+        <div class="conversation-list" id="conversation-list"></div>
+
+        <div class="settings-panel">
+          <label class="field-label" for="mode-select">模式</label>
+          <select id="mode-select">
+            <option value="chat">对话</option>
+            <option value="writing">写作</option>
+            <option value="code">代码</option>
+            <option value="study">学习</option>
+          </select>
+
+          <div class="field-label">深度</div>
+          <div class="segmented" id="depth-control" role="group" aria-label="输出深度">
+            <button type="button" data-depth="short">简短</button>
+            <button type="button" data-depth="normal">标准</button>
+            <button type="button" data-depth="detailed">详细</button>
+          </div>
+
+          <label class="field-label" for="cwd-input">工作目录</label>
+          <input id="cwd-input" type="text" spellcheck="false" autocomplete="off">
+
+          <label class="field-label" for="model-input">模型</label>
+          <input id="model-input" type="text" spellcheck="false" autocomplete="off" placeholder="默认">
+
+          <label class="toggle-row">
+            <input id="web-search-toggle" type="checkbox">
+            <span>联网搜索</span>
+          </label>
+
+          <label class="toggle-row">
+            <input id="allow-write-toggle" type="checkbox">
+            <span>允许写文件</span>
+          </label>
+        </div>
+      </aside>
+
+      <main class="chat-panel">
+        <header class="chat-header">
+          <div>
+            <h1 id="chat-title">新会话</h1>
+            <div class="status-line" id="status-line">就绪</div>
+          </div>
+          <button class="secondary-button" id="clear-chat" type="button">清空</button>
+        </header>
+
+        <section class="messages" id="messages" aria-live="polite"></section>
+
+        <form class="composer" id="composer">
+          <div class="drop-hint" id="drop-hint">松开即可添加文件</div>
+          <div class="attachment-tray hidden" id="attachment-tray"></div>
+          <div class="composer-row">
+            <input id="file-input" type="file" multiple class="hidden" accept="image/png,image/jpeg,image/webp,text/*,.txt,.md,.markdown,.csv,.tsv,.json,.jsonl,.yaml,.yml,.toml,.xml,.html,.css,.js,.jsx,.ts,.tsx,.py,.rb,.go,.rs,.java,.c,.cpp,.h,.hpp,.cs,.php,.sql,.sh,.bash,.zsh,.ps1,.log">
+            <button class="secondary-button attach-button" id="attach-button" type="button" title="添加附件" aria-label="添加附件">+</button>
+            <textarea id="prompt-input" rows="1" placeholder="输入消息，或拖入图片、文本文件"></textarea>
+            <div class="composer-actions">
+              <button class="secondary-button hidden" id="stop-button" type="button">停止</button>
+              <button class="primary-button" id="send-button" type="submit">发送</button>
+            </div>
+          </div>
+        </form>
+      </main>
+    </div>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>
